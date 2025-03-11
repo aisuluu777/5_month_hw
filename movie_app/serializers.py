@@ -4,7 +4,7 @@ from . import models
 class DirectorSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Director
-        fields = '__all__'
+        fields = ['name', 'movies_count']
 
 class DirectorDetailSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,7 +14,8 @@ class DirectorDetailSerializer(serializers.ModelSerializer):
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Movie
-        fields = '__all__'
+        fields = ['title', 'description', 'duration','reviews_detail', 'average_rating']
+
 
 
 class MovieDetailSerializer(serializers.ModelSerializer):

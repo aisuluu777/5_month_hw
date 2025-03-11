@@ -49,3 +49,9 @@ def reviews_detail_apiview(request, id):
         return Response(data={'error':'Page Not Found'},status=404)
     data = serializers.ReviewDetailSerializer(review, many=False).data
     return Response(data=data)
+
+@api_view(['GET'])
+def movies_review_list(request):
+    review_lst = models.Movie.objects.all()
+    serializer = serializers.MovieSerializer(review_lst, many=True)
+    return Response(data=serializer.data,status=200)
