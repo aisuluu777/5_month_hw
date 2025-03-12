@@ -7,8 +7,6 @@
     <list default="true" id="e0910285-cf13-4626-82b2-071c4a776c76" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/movie_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/movie_app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movie_app/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/movie_app/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movie_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/movie_app/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +98,7 @@
       <workItem from="1741588019443" duration="5149000" />
       <workItem from="1741674198509" duration="12566000" />
       <workItem from="1741763191222" duration="2132000" />
-      <workItem from="1741765660685" duration="2292000" />
+      <workItem from="1741765660685" duration="4462000" />
     </task>
     <servers />
   </component>

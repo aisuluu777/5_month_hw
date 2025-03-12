@@ -19,6 +19,8 @@ class Review(models.Model):
     text = models.TextField()
     movie = models.ForeignKey('Movie', on_delete=models.CASCADE, related_name='movies')
 
+    def __str__(self):
+        return self.text
 
 
 class Movie(models.Model):
@@ -44,9 +46,6 @@ class Movie(models.Model):
             return "Рейтинг отсутствует"
 
         return round(total_stars / count, 2)
-
-    def director_name(self):
-        return self.director.name
 
 
 
