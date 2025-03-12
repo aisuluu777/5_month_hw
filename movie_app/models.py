@@ -6,6 +6,7 @@ class Director(models.Model):
     def __str__(self):
         return self.name
 
+
     def movies_count(self):
         return self.directors.count()
 
@@ -43,6 +44,9 @@ class Movie(models.Model):
             return "Рейтинг отсутствует"
 
         return round(total_stars / count, 2)
+
+    def director_name(self):
+        return self.director.name
 
 
 
