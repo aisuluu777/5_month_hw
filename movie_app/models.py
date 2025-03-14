@@ -8,7 +8,7 @@ class Director(models.Model):
 
 
     def movies_count(self):
-        return self.directors.count()
+        return self.movies.count()
 
 
 class Review(models.Model):
@@ -17,7 +17,7 @@ class Review(models.Model):
     )
     star = models.IntegerField(choices=STARS, default=4)
     text = models.TextField()
-    movie = models.ForeignKey('Movie', on_delete=models.CASCADE, related_name='movies')
+    movie = models.ForeignKey('Movie', on_delete=models.CASCADE, related_name='reviews')
 
     def __str__(self):
         return self.text
@@ -27,18 +27,18 @@ class Movie(models.Model):
     title = models.CharField(max_length=200, verbose_name='Введит название фильма')
     description = models.TextField(verbose_name='Введите краткое описание фильма')
     duration = models.CharField(max_length=50 ,verbose_name='Укажите длительеость фильма')
-    director = models.ForeignKey(Director, blank=True, null=True, on_delete=models.CASCADE, related_name='directors')
+    director = models.ForeignKey(Director, blank=True, null=True, on_delete=models.CASCADE, related_name='movies')
 
 
     def __str__(self):
         return self.title
 
     def reviews_detail(self):
-        return [review.text for review in self.movies.all()]
+        return [review.text for review in self.reviews.all()]
 
 
     def average_rating(self):
-        reviews = self.movies.all()
+        reviews = self.reviews.all()
         total_stars = sum(review.star for review in reviews)
         count = reviews.count()
 
