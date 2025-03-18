@@ -1,9 +1,7 @@
-from wsgiref.validate import validator
-
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from . import models, serializers
+from . import models
 from .models import Director, Movie, Review
 from . import serializers
 from django.db import transaction
@@ -18,7 +16,7 @@ def directors_list_create_view(request):
     elif request.method == 'POST':
         validator = serializers.DirectorValidateSerializer(data=request.data)
         validator.is_valid(raise_exception=True)
-        name = request.data.get('name')
+        name = validator.validated_data.get('name')
         director = models.Director.objects.create(name=name)
         return Response(data=serializers.DirectorValidateSerializer(director).data, status=201)
 
@@ -38,7 +36,7 @@ def director_detail_apiview(request, id):
     elif request.method == 'PUT':
         validator = serializers.DirectorValidateSerializer(data=request.data)
         validator.is_valid(raise_exception=True)
-        director.name = request.data.get('name')
+        director.name = validator.validated_data.get('name')
         director.save()
         return Response(data=serializers.DirectorValidateSerializer(director).data
                         ,status=status.HTTP_201_CREATED)
@@ -53,10 +51,10 @@ def movies_list_apiview(request):
     elif request.method == 'POST':
         validator = serializers.MovieValidateSerializer(data=request.data)
         validator.is_valid(raise_exception=True)
-        title = request.data.get('title')
-        description = request.data.get('description')
-        duration = request.data.get('duration')
-        director_id = request.data.get('director_id')
+        title = validator.validated_data.get('title')
+        description = validator.validated_data.get('description')
+        duration = validator.validated_data.get('duration')
+        director_id = validator.validated_data.get('director_id')
         movie = models.Movie.objects.create(
             title=title,
             description=description,
@@ -81,10 +79,10 @@ def movies_detail_apiview(request, id):
         validator = serializers.MovieValidateSerializer(data=request.data)
         validator.is_valid(raise_exception=True)
         with transaction.atomic():
-            movie.title = request.data.get('title')
-            movie.description = request.data.get('description')
-            movie.duration = request.data.get('duration')
-            movie.director_id = request.data.get('director_id')
+            movie.title = validator.validated_data.get('title')
+            movie.description = validator.validated_data.get('description')
+            movie.duration = validator.validated_data.get('duration')
+            movie.director_id = validator.validated_data.get('director_id')
             movie.save()
             return Response(data=serializers.MovieValidateSerializer(movie).data, status=201)
 
@@ -97,9 +95,9 @@ def reviews_list_apiview(request):
     elif request.method == 'POST':
         validator = serializers.ReviewValidateSerializer(data=request.data)
         validator.is_valid(raise_exception=True)
-        star = request.data.get('star')
-        text = request.data.get('text')
-        movie_id = request.data.get('movie_id')
+        star = validator.validated_data.get('star')
+        text = validator.validated_data.get('text')
+        movie_id = validator.validated_data.get('movie_id')
         movie = models.Review.objects.create(
             star=star,
             text=text,
@@ -122,9 +120,9 @@ def reviews_detail_apiview(request, id):
     elif request.method == 'PUT':
         validator = serializers.ReviewValidateSerializer(data=request.data)
         validator.is_valid(raise_exception=True)
-        review.star = request.data.get('star')
-        review.text = request.data.get('text')
-        review.movie_id = request.data.get('movie_id')
+        review.star = validator.validated_data.get('star')
+        review.text = validator.validated_data.get('text')
+        review.movie_id = validator.validated_data.get('movie_id')
         review.save()
         return Response(data=serializers.ReviewValidateSerializer(review).data, status=201)
 
