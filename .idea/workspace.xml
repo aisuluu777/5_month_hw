@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e0910285-cf13-4626-82b2-071c4a776c76" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movie_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/movie_app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie_app/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/movie_app/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/movie_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/movie_app/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,7 +102,12 @@
       <workItem from="1741765660685" duration="7381000" />
       <workItem from="1741854778527" duration="7178000" />
       <workItem from="1741942197389" duration="3436000" />
-      <workItem from="1741945674699" duration="1641000" />
+      <workItem from="1741945674699" duration="4609000" />
+      <workItem from="1742018888086" duration="1811000" />
+      <workItem from="1742022524999" duration="1261000" />
+      <workItem from="1742197670692" duration="8304000" />
+      <workItem from="1742207455241" duration="355000" />
+      <workItem from="1742279104154" duration="3345000" />
     </task>
     <servers />
   </component>
