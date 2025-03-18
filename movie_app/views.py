@@ -78,13 +78,12 @@ def movies_detail_apiview(request, id):
     elif request.method == 'PUT':
         validator = serializers.MovieValidateSerializer(data=request.data)
         validator.is_valid(raise_exception=True)
-        with transaction.atomic():
-            movie.title = validator.validated_data.get('title')
-            movie.description = validator.validated_data.get('description')
-            movie.duration = validator.validated_data.get('duration')
-            movie.director_id = validator.validated_data.get('director_id')
-            movie.save()
-            return Response(data=serializers.MovieValidateSerializer(movie).data, status=201)
+        movie.title = validator.validated_data.get('title')
+        movie.description = validator.validated_data.get('description')
+        movie.duration = validator.validated_data.get('duration')
+        movie.director_id = validator.validated_data.get('director_id')
+        movie.save()
+        return Response(data=serializers.MovieValidateSerializer(movie).data, status=201)
 
 @api_view(['GET', 'POST'])
 def reviews_list_apiview(request):
