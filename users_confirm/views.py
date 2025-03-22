@@ -39,7 +39,7 @@ def register_api_view(request):
 
 
 @api_view(['POST'])
-def activate_user_api_view(request):
+def confirm_user_api_view(request):
     code = request.data.get('code')
     try:
         user_auth = UserAuthentication.objects.get(code=code)
