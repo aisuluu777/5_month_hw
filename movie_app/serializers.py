@@ -41,10 +41,10 @@ class MovieValidateSerializer(serializers.Serializer):
             raise serializers.ValidationError("Director does not exist")
         return director_id
 
-    def validate_title(self, title):
-        if Movie.objects.filter(title=title).exists():
-            raise serializers.ValidationError("Film with this title is already exists, please choose another title")
-        return title
+    # def validate_title(self, title):
+    #     if Movie.objects.filter(title=title).exists():
+    #         raise serializers.ValidationError("Film with this title is already exists, please choose another title")
+    #     return title
 
 class MovieDetailSerializer(serializers.ModelSerializer):
     class Meta:
