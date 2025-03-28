@@ -57,3 +57,28 @@ class ConfirmApiView(APIView):
 
 
 
+
+
+
+# class EmailApiView(APIView):
+#     def post(self, request):
+#         email = request.data.get('email')
+#         try:
+#             user = User.objects.get(email=email)
+#             code = UserAuthentication.objects.get(user=user)
+#
+#             send_mail(
+#                 'ваш код',
+#                 f'Ваш код сброса пароля: {code.code}',
+#                 'aisuluunurlanova@gmail.com',
+#                 [email],
+#                 fail_silently=False,
+#             )
+#             return Response(status=status.HTTP_200_OK)
+#         except User.DoesNotExist:
+#             return Response("Пользователь с таким email не найден.")
+
+
+
+
+
