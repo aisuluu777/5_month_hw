@@ -7,9 +7,9 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
-from .models import create_code, UserAuthentication
+from .models import UserAuthentication
 from rest_framework.views import APIView
-
+import random
 
 class AuthorizationApiView(APIView):
     def post(self, request):
@@ -32,27 +32,31 @@ class RegisterApiView(APIView):
         password = serializer.validated_data.get('password')
         user = User.objects.create_user(username=username,
                                  email=email, password=password, is_active=False)
-        code = create_code()
-        print(code)
+        code = ''.join([str(random.randint(0, 9) for i in range(6))])
+        models.UserAuthentication.objects.create(user=user, code=code)
+        send_mail(
+            'Your code',
+            message=code,
+            from_email='a30139706@gmail.com',
+            recipient_list=[user.email]
+        )
         UserAuthentication.objects.create(user=user, code=code)
         return Response(data={'user_id' : user.id}, status=status.HTTP_201_CREATED)
 
 
-class ConfirmApiView(APIView):
+class SMSCodeConfirm(APIView):
     def post(self, request):
-        code = request.data.get('code')
+        serializer = serializers.SMSCodeSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        sms_code = serializer.validated_data['sms_code']
         try:
-            user_auth = UserAuthentication.objects.get(code=code)
-            user = user_auth.user
-        except ObjectDoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        if user_auth.code == code:
-            user.is_active = True
-            user.save()
-            return Response(data={'Ваш аккаунт успешно активирован'}, status=status.HTTP_200_OK)
-        else:
-            return Response(data={'Неправильный код'}, status=status.HTTP_400_BAD_REQUEST)
-
+            sms = models.UserAuthentication.objects.get(sms_code=sms_code)
+        except models.UserAuthentication.DoesNotExist:
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={'error': 'Invalid code'})
+        sms.user.is_active = True
+        sms.user.save()
+        sms.delete()
+        return Response(status=status.HTTP_200_OK)
 
 
 

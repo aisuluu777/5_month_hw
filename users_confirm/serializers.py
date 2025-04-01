@@ -16,3 +16,6 @@ class UserRegisterSerializer(serializers.Serializer):
 class UserAuthenticateSerializer(serializers.Serializer):
     username = serializers.CharField(min_length=3, max_length=20)
     password = serializers.CharField(min_length=8, max_length=50)
+
+class SMSCodeSerializer(serializers.Serializer):
+    code = serializers.IntegerField()
